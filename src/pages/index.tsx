@@ -3,21 +3,21 @@ import { addUpTo, addUpTo2 } from "@/algorithms-&-data-structures/big-o";
 import Button from "@/components/button";
 
 export default function Home() {
-  const addUpFun = () => {
-    addUpFirst();
-    addUpSecond();
+  const addUpFun = (number: number) => {
+    addUpFirst(number);
+    addUpSecond(number);
   };
 
-  const addUpFirst = () => {
+  const addUpFirst = (number: number) => {
     const time1 = performance.now();
-    addUpTo(100000);
+    addUpTo(number);
     const time2 = performance.now();
     console.log("addUpTo", (time2 - time1) / 1000);
   };
 
-  const addUpSecond = () => {
+  const addUpSecond = (number: number) => {
     const time1 = performance.now();
-    addUpTo2(100000);
+    addUpTo2(number);
     const time2 = performance.now();
     console.log("addUpTo2", (time2 - time1) / 1000);
   };
@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <>
       <div className="h-full bg-slate-900 w-full p-10">
-        <Button onClick={() => addUpFun()}>Add Up</Button>
+        <Button onClick={() => addUpFun(10000000000)}>Add Up</Button>
       </div>
     </>
   );
