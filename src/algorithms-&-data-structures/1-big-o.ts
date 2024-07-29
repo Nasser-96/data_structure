@@ -22,3 +22,11 @@ export function addUpTo2(n: number) {
 
 //O(n) space: the memory that going to be used during any operation
 //O(n) time: the time that going to take during any operation
+
+//  index                   0        1       2
+const names: string[] = ["Nasser", "Ali", "Ahmed"]; // each name has his own index so when we know the index it is going to be O(1)
+
+// when we push new element into array let's say it is Khaled we add it to the last of the array so it's index going to be 3 so it's going to be O(1)
+// HOWEVER if we add Khaled to the beginning of the array it is going to O(n), why ? because when we add to the beginning of the array it is going to change the rest of the array index
+// also when we delete element from the array is the same, delete the last element O(1) delete the first one is O(n)
+// so we should try to avoid add and delete from the first of the array

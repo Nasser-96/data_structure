@@ -1,5 +1,10 @@
 "use client";
-import { addUpTo, addUpTo2 } from "@/algorithms-&-data-structures/big-o";
+import { addUpTo, addUpTo2 } from "@/algorithms-&-data-structures/1-big-o";
+import {
+  charCount,
+  charCountUsingCode,
+  refactorCharCount,
+} from "@/algorithms-&-data-structures/2-problem-solving";
 import Button from "@/components/button";
 
 export default function Home() {
@@ -22,10 +27,23 @@ export default function Home() {
     console.log("addUpTo2", (time2 - time1) / 1000);
   };
 
+  const returnCharCount = () => {
+    const count = charCount("nasser2_-+=.,?");
+    const countRefactor = refactorCharCount("nasser2_-+=.,?");
+    const countUsingCode = charCountUsingCode("nasser2_-+=.,?");
+    console.log("charCount", count);
+    console.log("refactorCharCount", countRefactor);
+    console.log("countUsingCode", countUsingCode);
+    console.log("testChar", "Z".charCodeAt(0));
+  };
+
   return (
     <>
       <div className="h-full bg-slate-900 w-full p-10">
-        <Button onClick={() => addUpFun(10000000000)}>Add Up</Button>
+        <div className="flex gap-2 flex-wrap">
+          <Button onClick={() => addUpFun(100000000)}>Add Up</Button>
+          <Button onClick={() => returnCharCount()}>Count</Button>
+        </div>
       </div>
     </>
   );
