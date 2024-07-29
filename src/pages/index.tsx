@@ -5,6 +5,7 @@ import {
   charCountUsingCode,
   refactorCharCount,
 } from "@/algorithms-&-data-structures/2-problem-solving";
+import { isSameSquared } from "@/algorithms-&-data-structures/3-problem-solving-patterns";
 import Button from "@/components/button";
 
 export default function Home() {
@@ -37,12 +38,20 @@ export default function Home() {
     console.log("testChar", "Z".charCodeAt(0));
   };
 
+  const sameSquare = () => {
+    const firstArr = [1, 2, 3];
+    const secondArr = [4, 1, 9];
+    const isSame = isSameSquared(firstArr, secondArr);
+    console.log("isSame", isSame);
+  };
+
   return (
     <>
       <div className="h-full bg-slate-900 w-full p-10">
         <div className="flex gap-2 flex-wrap">
           <Button onClick={() => addUpFun(100000000)}>Add Up</Button>
           <Button onClick={() => returnCharCount()}>Count</Button>
+          <Button onClick={() => sameSquare()}>Same Square</Button>
         </div>
       </div>
     </>
