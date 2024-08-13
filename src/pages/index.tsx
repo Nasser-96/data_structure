@@ -5,7 +5,7 @@ import {
   charCountUsingCode,
   refactorCharCount,
 } from "@/algorithms-&-data-structures/2-problem-solving";
-import { isSameSquared } from "@/algorithms-&-data-structures/3-problem-solving-patterns";
+import { isSameSquared, isSameSquaredSecond } from "@/algorithms-&-data-structures/3-problem-solving-patterns";
 import Button from "@/components/button";
 
 export default function Home() {
@@ -41,8 +41,10 @@ export default function Home() {
   const sameSquare = () => {
     const firstArr = [1, 2, 3];
     const secondArr = [4, 1, 9];
-    const isSame = isSameSquared(firstArr, secondArr);
+    const isSame = isSameSquared([...firstArr], [...secondArr]);
+    const isSameSecond = isSameSquaredSecond([...firstArr], [...secondArr]);
     console.log("isSame", isSame);
+    console.log("isSameSecond", isSameSecond);
   };
 
   return (
