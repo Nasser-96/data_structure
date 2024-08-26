@@ -102,3 +102,15 @@ export function isSameAnagramsAnotherSolution(first: string, second: string) {
   }
   return true;
 }
+
+// Multiple Pointers Pattern
+// Naive Solution
+export function sumZero(array: number[]) {
+  for (let i = 0; i < array.length; i++) {
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[i] + array[j] === 0) {
+        return [array[i], array[j]];
+      }
+    }
+  }
+}

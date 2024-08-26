@@ -10,6 +10,7 @@ import {
   isSameAnagramsAnotherSolution,
   isSameSquared,
   isSameSquaredSecond,
+  sumZero,
 } from "@/algorithms-&-data-structures/3-problem-solving-patterns";
 import Button from "@/components/button";
 
@@ -19,18 +20,19 @@ export default function Home() {
     addUpSecond(number);
   };
 
+  const measureTime = (fn: () => any, label: string) => {
+    const startTime = performance.now();
+    console.log(fn());
+    const endTime = performance.now();
+    console.log((endTime - startTime) / 1000, label);
+  };
+
   const addUpFirst = (number: number) => {
-    const time1 = performance.now();
-    addUpTo(number);
-    const time2 = performance.now();
-    console.log("addUpTo", (time2 - time1) / 1000);
+    measureTime(() => addUpTo(number), "addUpTo");
   };
 
   const addUpSecond = (number: number) => {
-    const time1 = performance.now();
-    addUpTo2(number);
-    const time2 = performance.now();
-    console.log("addUpTo2", (time2 - time1) / 1000);
+    measureTime(() => addUpTo2(number), "addUpTo");
   };
 
   const returnCharCount = () => {
@@ -48,13 +50,14 @@ export default function Home() {
     const firstArr = multiplyArray(arrayLength, [1, 2, 4, 4]);
     const secondArr = multiplyArray(arrayLength, [4, 1, 16, 16]);
 
-    const time1 = performance.now();
-    isSameSquared([...firstArr], [...secondArr]);
-    const time2 = performance.now();
-    isSameSquaredSecond([...firstArr], [...secondArr]);
-    const time3 = performance.now();
-    console.log("isSameSquared", (time2 - time1) / 1000);
-    console.log("isSameSquaredSecond", (time3 - time2) / 1000);
+    measureTime(
+      () => isSameSquared([...firstArr], [...secondArr]),
+      "isSameSquared"
+    );
+    measureTime(
+      () => isSameSquaredSecond([...firstArr], [...secondArr]),
+      "isSameSquaredSecond"
+    );
   };
 
   const multiplyArray = (number: number, array: number[]) => {
@@ -68,17 +71,23 @@ export default function Home() {
     const repeatTime = 10000000;
     const firstString = "aap".repeat(repeatTime);
     const secondString = "paa".repeat(repeatTime);
-    const time1 = performance.now();
-    const anagrams = isSameAnagrams(firstString, secondString);
-    const time2 = performance.now();
-    console.log("isSameAnagrams", (time2 - time1) / 1000);
-    const anagramsSecondSolution = isSameAnagramsAnotherSolution(
-      firstString,
-      secondString
+    measureTime(
+      () => isSameAnagrams(firstString, secondString),
+      "isSameAnagrams"
     );
-    const time3 = performance.now();
-    console.log("isSameAnagramsAnotherSolution", (time3 - time2) / 1000);
+    measureTime(
+      () => isSameAnagramsAnotherSolution(firstString, secondString),
+      "isSameAnagramsAnotherSolution"
+    );
     // both solution almost same
+  };
+
+  const multiplePointersPattern = () => {
+    const sortedArray = [-4, -3, -2, -1, 0, 1, 2, 5];
+
+    measureTime(() => {
+      return sumZero(sortedArray);
+    }, "sumZero");
   };
 
   return (
@@ -89,6 +98,9 @@ export default function Home() {
           <Button onClick={() => returnCharCount()}>Count</Button>
           <Button onClick={() => sameSquare()}>Same Square</Button>
           <Button onClick={() => anagrams()}>Anagrams</Button>
+          <Button onClick={() => multiplePointersPattern()}>
+            Multi Pointer
+          </Button>
         </div>
       </div>
     </>
