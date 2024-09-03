@@ -103,8 +103,10 @@ export function isSameAnagramsAnotherSolution(first: string, second: string) {
   return true;
 }
 
-// Multiple Pointers Pattern
-// Naive Solution
+// ==================================================================
+// MULTIPLE POINTERS PATTERN
+// Naive Solution which going to take a lot of time
+// this is O(n)2
 export function sumZero(array: number[]) {
   for (let i = 0; i < array.length; i++) {
     for (let j = i + 1; j < array.length; j++) {
@@ -113,4 +115,101 @@ export function sumZero(array: number[]) {
       }
     }
   }
+}
+
+// Better solution
+// and this is O(n)
+export function sumZeroBetter(array: number[]) {
+  let left = 0;
+  let right = array.length - 1;
+  while (left < right) {
+    let sum = array[left] + array[right];
+    if (sum === 0) {
+      return [array[left], array[right]];
+    } else if (sum > 0) {
+      right--;
+    } else {
+      left++;
+    }
+  }
+}
+
+// this not the better solution but it is a solution
+// O(n)2
+export function countUniqueValue(array: number[]) {
+  const newArray: number[] = [];
+  array.forEach((number: number) => {
+    const indexInNewArray = newArray.indexOf(number); // this is consider as loop
+    if (indexInNewArray === -1) {
+      newArray.push(number);
+    }
+  });
+  return newArray.length;
+}
+
+export function countUniqueValueBetter(array: number[]) {
+  let firstPointer = 0;
+  let secondPointer = 1;
+  let count = 0;
+  while (secondPointer <= array.length) {
+    if (array[firstPointer] !== array[secondPointer]) {
+      count++;
+      firstPointer = secondPointer;
+    }
+    secondPointer++;
+  }
+  return count;
+}
+
+export function countUniqueValueLessVariables(array: number[]) {
+  if (array.length === 0) {
+    return 0;
+  }
+  let i = 0;
+  for (let j = 0; j < array.length; j++) {
+    if (array[i] !== array[j]) {
+      i++;
+      array[i] = array[j];
+    }
+  }
+  return i + 1;
+}
+
+// ==================================================================
+// SLIDING WINDOW PATTERN
+// Maximum sum of n consecutive elements in the array
+// Naive solution O(n)2
+export function maxSubArraySum(array: number[], number: number) {
+  if (number > array.length) {
+    return null;
+  }
+  // we choose -Infinity because the numbers can be negative so if we choose 0 it will not help
+  let max = -Infinity;
+  for (let i = 0; i < array.length - number + 1; i++) {
+    let temp = 0;
+    for (let j = 0; j < number; j++) {
+      temp += array[i + j];
+    }
+    if (temp > max) {
+      max = temp;
+    }
+  }
+  return max;
+}
+
+export function maxSubArraySumBetter(array: number[], number: number) {
+  if (array.length < number) return null;
+  let maxSub = 0;
+  let tempSub = 0;
+
+  for (let i = 0; i < number; i++) {
+    maxSub += array[i];
+  }
+  tempSub = maxSub;
+  for (let i = number; i < array.length; i++) {
+    // what we do here is we subtract the first number on the sum and added the last one EX: [1, 2, 5, 8, 1, 5] let say we already have the sum of the 1,2,5 which is 8, so if we want to know the next three (the number that passed to this function) all we need is to subtract 1 (first number added on the three numbers) and add the 8 (new number) which is become the third number
+    tempSub = tempSub - array[i - number] + array[i];
+    maxSub = Math.max(maxSub, tempSub);
+  }
+  return maxSub;
 }

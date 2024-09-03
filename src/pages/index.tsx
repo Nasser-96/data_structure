@@ -6,11 +6,17 @@ import {
   refactorCharCount,
 } from "@/algorithms-&-data-structures/2-problem-solving";
 import {
+  countUniqueValue,
+  countUniqueValueBetter,
+  countUniqueValueLessVariables,
   isSameAnagrams,
   isSameAnagramsAnotherSolution,
   isSameSquared,
   isSameSquaredSecond,
+  maxSubArraySum,
+  maxSubArraySumBetter,
   sumZero,
+  sumZeroBetter,
 } from "@/algorithms-&-data-structures/3-problem-solving-patterns";
 import Button from "@/components/button";
 
@@ -88,6 +94,38 @@ export default function Home() {
     measureTime(() => {
       return sumZero(sortedArray);
     }, "sumZero");
+
+    measureTime(() => {
+      return sumZeroBetter(sortedArray);
+    }, "sumZeroBetter");
+  };
+
+  const uniqueValue = () => {
+    const sortedArray: number[] = [];
+    measureTime(() => {
+      return countUniqueValue(sortedArray);
+    }, "countUniqueValue");
+
+    measureTime(() => {
+      return countUniqueValueBetter(sortedArray);
+    }, "countUniqueValueBetter");
+
+    measureTime(() => {
+      return countUniqueValueLessVariables(sortedArray);
+    }, "countUniqueValueLessVariables");
+  };
+
+  const maxSubArray = () => {
+    const array = [1, 2, 5, 8, 1, 5];
+    const multipliedArray = Array(array.length * 1000000)
+      .fill("")
+      .map((_, i) => array[i % array.length]);
+    measureTime(() => {
+      return maxSubArraySum(multipliedArray, 10000000);
+    }, "maxSubArraySum");
+    measureTime(() => {
+      return maxSubArraySumBetter(multipliedArray, 10000000);
+    }, "maxSubArraySumBetter");
   };
 
   return (
@@ -101,6 +139,8 @@ export default function Home() {
           <Button onClick={() => multiplePointersPattern()}>
             Multi Pointer
           </Button>
+          <Button onClick={() => uniqueValue()}>Unique Value</Button>
+          <Button onClick={() => maxSubArray()}>Max Sub Array </Button>
         </div>
       </div>
     </>
