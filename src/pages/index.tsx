@@ -15,6 +15,8 @@ import {
   isSameSquaredSecond,
   maxSubArraySum,
   maxSubArraySumBetter,
+  searchForNumber,
+  searchForNumberBetter,
   sumZero,
   sumZeroBetter,
 } from "@/algorithms-&-data-structures/3-problem-solving-patterns";
@@ -128,6 +130,16 @@ export default function Home() {
     }, "maxSubArraySumBetter");
   };
 
+  const search = () => {
+    const array = [1, 2, 3, 4, 5, 6];
+    measureTime(() => {
+      return searchForNumber(array, 3);
+    }, "searchForNumber");
+    measureTime(() => {
+      return searchForNumberBetter(array, 3);
+    }, "searchForNumberBetter");
+  };
+
   return (
     <>
       <div className="h-full bg-slate-900 w-full p-10">
@@ -141,6 +153,7 @@ export default function Home() {
           </Button>
           <Button onClick={() => uniqueValue()}>Unique Value</Button>
           <Button onClick={() => maxSubArray()}>Max Sub Array </Button>
+          <Button onClick={() => search()}>Search For Number</Button>
         </div>
       </div>
     </>

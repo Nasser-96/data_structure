@@ -213,3 +213,34 @@ export function maxSubArraySumBetter(array: number[], number: number) {
   }
   return maxSub;
 }
+
+// ==================================================================
+// DIVIDE AND CONQUER PATTERN
+// Naive Solution
+export function searchForNumber(array: number[], value: number) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === value) {
+      return i;
+    }
+  }
+  return -1;
+}
+
+// Better solution
+export function searchForNumberBetter(array: number[], value: number) {
+  let min = 0;
+  let max = array.length - 1;
+
+  while (min <= max) {
+    let middle = Math.floor((min + max) / 2);
+
+    if (array[middle] < value) {
+      min = middle + 1;
+    } else if (array[middle] > value) {
+      max = middle - 1;
+    } else {
+      return middle;
+    }
+  }
+  return -1;
+}
